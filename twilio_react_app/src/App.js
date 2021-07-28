@@ -1,10 +1,10 @@
-import { Button } from 'react-bootstrap';
 import './App.css';
+import FormPhoneNumber from './components/app/FormPhoneNumber';
 
 function App() {
   return (
     <div className='App'>
-      <Button variant='primary'>Primary</Button>
+      <FormPhoneNumber />
     </div>
   );
 }
