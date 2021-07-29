@@ -10,3 +10,13 @@ services:
     env_file:
       - ./flask_backend/.env
     working_dir: /flask_backend
+
+  react_app:
+    container_name: react_frontend
+    env_file: './twilio_react_app/.env'
+    build:
+      context: ./twilio_react_app
+      dockerfile: ./Dockerfile
+    image: 'front_end'
+    ports:
+      - '3000:3000'
