@@ -14,8 +14,8 @@ const FormPhoneNumber = () => {
   const handleSubmit = (event) => {
     event.preventDefault();
 
-    makeCall({ phone_number: phoneNumber }).then((data) => {
-      console.log(data);
+    makeCall({ phone_number: phoneNumber }).then((response) => {
+      console.log(response.data);
     });
   };
 
