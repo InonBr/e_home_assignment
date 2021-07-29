@@ -6,8 +6,9 @@ import '../styles/form.css';
 const PhoneInputField = (props) => {
   const [phoneNumber, setPhoneNumber] = useState('');
 
-  const handleInput = () => {
-    props.handleFunc(phoneNumber);
+  const handleChange = (number) => {
+    setPhoneNumber(number);
+    props.handleFunc(number);
   };
 
   return (
@@ -15,8 +16,7 @@ const PhoneInputField = (props) => {
       defaultCountry='IL'
       placeholder='Enter phone number'
       value={phoneNumber}
-      onChange={setPhoneNumber}
-      onInput={() => handleInput()}
+      onChange={(number) => handleChange(number)}
       className='number-input'
     />
   );

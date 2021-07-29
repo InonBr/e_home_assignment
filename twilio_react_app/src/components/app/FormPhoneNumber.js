@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { Form, Button, Row, Col } from 'react-bootstrap';
 import PhoneInputField from './PhoneInput';
+import { makeCall } from '../../lib/api';
 import '../styles/form.css';
 
 const FormPhoneNumber = () => {
@@ -10,10 +11,16 @@ const FormPhoneNumber = () => {
     setphoneNumber(number);
   };
 
-  console.log(phoneNumber);
+  const handleSubmit = (event) => {
+    event.preventDefault();
+
+    makeCall({ phone_number: phoneNumber }).then((data) => {
+      console.log(data);
+    });
+  };
 
   return (
-    <Form className='m-5 form-width'>
+    <Form className='m-5 form-width' onSubmit={(event) => handleSubmit(event)}>
       <Form.Group as={Row} className='mb-3' controlId='formPlaintextEmail'>
         <Form.Label column sm='2'>
           Phone Number:

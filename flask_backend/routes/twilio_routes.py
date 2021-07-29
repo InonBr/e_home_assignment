@@ -6,7 +6,7 @@ from models import MakeCall
 
 
 @app.route("/api/make_call", methods=["POST"])
-@cross_origin()
+@cross_origin(["http://localhost:3000"])
 @validate(body=MakeCall)
 def call(body: MakeCall):
     phone_number = body.dict()
