@@ -14,7 +14,7 @@ client = Client(service_sid, auth_token)
 def make_a_call(phone_number):
     call = client.calls.create(
         method='GET',
-        to="+972525445034",
+        to=phone_number,
         from_="+972527321022",
         url="http://demo.twilio.com/docs/voice.xml",
         status_callback=' http://localhost:3000',
