@@ -1,0 +1,12 @@
+version: '3'
+services:
+  flask_app:
+    container_name: flask_app_backend
+    build: ./flask_backend
+    volumes:
+      - ./flask_backend:/flask_backend
+    ports:
+      - '5000:5000'
+    env_file:
+      - ./flask_backend/.env
+    working_dir: /flask_backend
