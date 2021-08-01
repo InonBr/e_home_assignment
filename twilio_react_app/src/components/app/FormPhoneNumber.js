@@ -10,8 +10,6 @@ const FormPhoneNumber = () => {
   const [phoneNumber, setphoneNumber] = useState('');
   const [fromErr, setFromErr] = useState(null);
 
-  console.log(twilioTokens);
-
   const handlePhoneInput = (number) => {
     setphoneNumber(number);
   };
