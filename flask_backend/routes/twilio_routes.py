@@ -1,3 +1,4 @@
+from twilio.base.exceptions import TwilioRestException
 from main import app
 from flask_cors import cross_origin
 from helpers import make_a_call, get_token
@@ -9,8 +10,12 @@ from models import MakeCall
 @cross_origin(["http://localhost:3000"])
 @validate(body=MakeCall)
 def call(body: MakeCall):
-    phone_number = body.dict()
-    sid = make_a_call(phone_number["phone_number"])
-    token = get_token()
+    try:
+        phone_number = body.dict()
+        phone_number = phone_number["phone_number"]
+        sid = make_a_call(phone_number)
+        token = get_token()
 
-    return {"msg": "call sent successfully!", "sid": sid, "token": token.decode("utf-8")}, 200
+        return {"msg": "call sent successfully!", "sid": sid, "token": token.decode("utf-8")}, 200
+    except TwilioRestException as e:
+        return {"msg": e.msg}, e.status
