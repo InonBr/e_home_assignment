@@ -1,11 +1,16 @@
-import { useState } from 'react';
+import { useState, useContext } from 'react';
+import { TwilioContext } from '../../context/TwilioContext';
 import { Form, Button, Row, Col } from 'react-bootstrap';
 import PhoneInputField from './PhoneInput';
 import { makeCall } from '../../lib/api';
 import '../styles/form.css';
 
 const FormPhoneNumber = () => {
+  const { twilioTokens, setTwilioTokens } = useContext(TwilioContext);
   const [phoneNumber, setphoneNumber] = useState('');
+  const [fromErr, setFromErr] = useState(null);
+
+  console.log(twilioTokens);
 
   const handlePhoneInput = (number) => {
     setphoneNumber(number);
@@ -13,10 +18,18 @@ const FormPhoneNumber = () => {
 
   const handleSubmit = (event) => {
     event.preventDefault();
+    setFromErr(null);
 
-    makeCall({ phone_number: phoneNumber }).then((response) => {
-      console.log(response.data);
-    });
+    makeCall({ phone_number: phoneNumber })
+      .then((response) => {
+        setTwilioTokens({ sid: response.data.sid, token: response.data.token });
+      })
+      .catch((error) => {
+        const errprMsg =
+          error.response.data.validation_error.body_params[0].msg;
+
+        setFromErr(errprMsg);
+      });
   };
 
   return (
@@ -36,6 +49,7 @@ const FormPhoneNumber = () => {
           </Button>
         </Col>
       </Form.Group>
+      <Form.Group className='err-color'>{fromErr}</Form.Group>
     </Form>
   );
 };

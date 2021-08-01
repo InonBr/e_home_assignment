@@ -5,3 +5,9 @@
 .form-width {
   width: 70%;
 }
+
+.err-color {
+  color: rgb(177, 29, 29);
+  font-weight: bold;
+  font-size: 150%;
+}

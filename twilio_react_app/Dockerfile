@@ -2,7 +2,7 @@ FROM ubuntu:20.04
 
 FROM node:14
 
-WORKDIR ./twilio_react_app/
+WORKDIR /twilio_react_app/
 
 COPY package*.json ./
 
