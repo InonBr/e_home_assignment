@@ -6,7 +6,7 @@ import { makeCall } from '../../lib/api';
 import '../styles/form.css';
 
 const FormPhoneNumber = () => {
-  const { twilioTokens, setTwilioTokens } = useContext(TwilioContext);
+  const { setTwilioTokens } = useContext(TwilioContext);
   const [phoneNumber, setphoneNumber] = useState('');
   const [fromErr, setFromErr] = useState(null);
 
@@ -23,8 +23,13 @@ const FormPhoneNumber = () => {
         setTwilioTokens({ sid: response.data.sid, token: response.data.token });
       })
       .catch((error) => {
-        const errprMsg =
-          error.response.data.validation_error.body_params[0].msg;
+        let errprMsg;
+
+        if (error.response.data.validation_error) {
+          errprMsg = error.response.data.validation_error.body_params[0].msg;
+        } else {
+          errprMsg = error.response.data.msg;
+        }
 
         setFromErr(errprMsg);
       });

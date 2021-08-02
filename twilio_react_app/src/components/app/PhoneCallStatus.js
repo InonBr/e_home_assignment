@@ -6,11 +6,13 @@ const PhoneCallStatus = () => {
   const { twilioTokens } = useContext(TwilioContext);
   const device = new Device();
 
-  device.setup(twilioTokens.token, { debug: true });
+  if (twilioTokens) {
+    device.setup(twilioTokens.token, { debug: true });
+  }
 
   console.log(device);
 
-  return <h1>hello world</h1>;
+  return <h1>placeholder for call status...</h1>;
 };
 
 export default PhoneCallStatus;

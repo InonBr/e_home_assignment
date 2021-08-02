@@ -11,6 +11,6 @@ class MakeCall(BaseModel):
         phone = validate_phone_number(phone)
 
         if phone is False:
-            raise ValueError("sorry, phone number is not valid")
+            raise ValueError("Sorry, phone number is not valid")
 
         return phone
