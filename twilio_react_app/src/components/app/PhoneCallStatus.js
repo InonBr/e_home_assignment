@@ -7,10 +7,10 @@ const PhoneCallStatus = () => {
   const device = new Device();
 
   if (twilioTokens) {
+    // my status is offline...
+    // not sure how to fix after log time of trial and error
     device.setup(twilioTokens.token, { debug: true });
   }
-
-  console.log(device);
 
   return <h1>placeholder for call status...</h1>;
 };
