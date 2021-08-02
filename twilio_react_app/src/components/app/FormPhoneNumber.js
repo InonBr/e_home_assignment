@@ -27,8 +27,10 @@ const FormPhoneNumber = () => {
 
         if (error.response.data.validation_error) {
           errprMsg = error.response.data.validation_error.body_params[0].msg;
-        } else {
+        } else if (error.response.data.msg) {
           errprMsg = error.response.data.msg;
+        } else {
+          console.error(error);
         }
 
         setFromErr(errprMsg);
